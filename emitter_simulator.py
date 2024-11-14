@@ -1,33 +1,29 @@
 import csv
 import requests
+import json
 
-import datetime
-
-
-URL = 'https://example.com/api/data'
+URL = 'http://localhost:8000/car_manager/create-metrics/'
 
 csv_file_path = 'cleaned output/test.csv'
-
-
 
 def send_row(row):
     try:
         message = { 
-                    "patente" : "BT-OF-87",
-                    "user" : "will afton",
-                    "timestamp": datetime.datetime.now() ,
-                    "data" : row,
+                    "car" : 1,
+                    "user" : 1,
+                     "data": json.dumps(row)
                 }
         
-        response = requests.post(URL, json=row)
+        response = requests.post(URL, message)
         
-        if response.status_code == 200:
+        if response.status_code == 201:
             print(f"Successfully sent row: {row}")
         else:
             print(f"Failed to send row: {row} - Status code: {response.status_code}")
 
     except requests.exceptions.RequestException as e:
         print(f"Error sending row: {row} - Error: {e}")
+        return False
 
 
 with open(csv_file_path, mode='r', newline='') as csvfile:
@@ -35,6 +31,8 @@ with open(csv_file_path, mode='r', newline='') as csvfile:
     
     for row in reader:
         send_row(row)
+        if send_row(row) == False:
+            break
 
 
 
