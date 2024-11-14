@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 
 
 class Car(models.Model):
@@ -13,8 +14,7 @@ class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     patente = models.CharField(max_length=20)
     timestamp = models.DateTimeField(auto_now_add=True)
-    csv = models.FileField(upload_to='uploads/csv_files/')
+    csv = models.JSONField()
 
     def __str__(self):
-        return f"El auto con patente {self.patente} perteneciente al usuario
-                {self.user.username} ha detectado valores extraños {self.csv}, a las {self.timestamp}"
+        return f"El auto con patente {self.patente} perteneciente al usuario {self.user.username} ha detectado valores extraños {self.csv}, a las {self.timestamp}"
