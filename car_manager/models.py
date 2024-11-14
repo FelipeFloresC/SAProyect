@@ -18,3 +18,13 @@ class Message(models.Model):
 
     def __str__(self):
         return f"El auto con patente {self.patente} perteneciente al usuario {self.user.username} ha detectado valores extraños {self.csv}, a las {self.timestamp}"
+    
+class Metrics(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    speed = models.FloatField()  
+    fuel_level = models.FloatField()  
+    timestamp = models.DateTimeField(auto_now_add=True)  
+
+    def __str__(self):
+        return f"Metrics for {self.user.username} - {self.car.patente} at {self.timestamp}"
