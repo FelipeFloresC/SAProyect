@@ -26,4 +26,4 @@ class CarSerializer(serializers.ModelSerializer):
 class MetricsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Metrics
-        fields = ['user', 'car', 'speed', 'fuel_level', 'timestamp']
+        fields = ['user', 'car', 'data', 'timestamp']

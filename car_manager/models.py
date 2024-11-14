@@ -22,8 +22,7 @@ class Message(models.Model):
 class Metrics(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    speed = models.FloatField()  
-    fuel_level = models.FloatField()  
+    data = models.CharField()
     timestamp = models.DateTimeField(auto_now_add=True)  
 
     def __str__(self):
