@@ -11,7 +11,6 @@ from .serializer import MetricsSerializer
 @csrf_exempt
 def test_mailer(request):
     try:
-        # Get or create a test user
         user, created = User.objects.get_or_create(
             username='juan',
             defaults={
@@ -19,7 +18,6 @@ def test_mailer(request):
             }
         )
         
-        # Create a test message
         message = Message.objects.create(
             user=user,
             patente='TEST12',
